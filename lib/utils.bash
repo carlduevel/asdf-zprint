@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for zprint.
 GH_REPO="https://github.com/kkinnear/zprint"
 TOOL_NAME="zprint"
 TOOL_TEST="zprint -v"
