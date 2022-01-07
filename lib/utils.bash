@@ -34,16 +34,23 @@ list_all_versions() {
   list_github_tags
 }
 
-
+binary_postfix() {
+  os=$(uname | tr '[:upper:]' '[:lower:]')
+  if [ "$os" == "linux" ]; then
+    echo "l"
+  elif  [ "$os" == "darwin" ]; then
+    echo "m"
+  else
+    fail "no zprint binary for $os available!"
+  fi
+}
 
 download_release() {
   local version filename url
   version="$1"
   filename="$2"
-  os=$(uname | tr '[:upper:]' '[:lower:]')
-  binary_postfix=${os:0:1}
 
-  url="$GH_REPO/releases/download/${version}/zprint${binary_postfix}-${version}"
+  url="$GH_REPO/releases/download/${version}/zprint$(binary_postfix)-${version}"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -72,6 +79,6 @@ install_version() {
     echo "$TOOL_NAME $version installation was successful!"
   ) || (
     rm -rf "$install_path"
-    fail "An error ocurred while installing $TOOL_NAME $version."
+    fail "an error ocurred while installing $tool_name $version."
   )
 }
