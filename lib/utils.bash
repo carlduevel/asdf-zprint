@@ -38,7 +38,7 @@ binary_postfix() {
   os=$(uname | tr '[:upper:]' '[:lower:]')
   if [ "$os" == "linux" ]; then
     echo "l"
-  elif  [ "$os" == "darwin" ]; then
+  elif [ "$os" == "darwin" ]; then
     echo "m"
   else
     fail "no zprint binary for $os available!"
